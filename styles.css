@@ -68,12 +68,16 @@ html {
 }
 
 /* REUSABEL */
+
+.input:focus:required:invalid {
+  box-shadow: 0px 0px 0px 1px var(--color-input-errors);
+}
+
 .input {
   padding: var(--12ws);
   border: 1px solid var(--color-light-grayish);
   border-radius: var(--10px);
   width: 100%;
-  margin-bottom: var(--12ws);
   font-family: "Space Grotesk", sans-serif;
 }
 
@@ -251,8 +255,17 @@ input:focus {
 .form-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  align-items: center;
+}
+
+.form-name-wrapper,
+.form-number-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--12ws);
+}
+
+.form-number {
+  letter-spacing: 1px;
 }
 
 .form-exp-dates {
@@ -274,8 +287,8 @@ input:focus {
 .form-cvc-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: var(--12ws);
+  /* justify-content: center; */
 }
 
 .form-btn {
@@ -338,3 +351,39 @@ input:focus {
 .msg-btn {
   width: 90%;
 }
+
+/* ERRORS */
+
+.date-msg-error {
+  grid-column: 1 / -1;
+}
+
+.msg-error {
+  display: inline-block;
+  font-size: var(--10px);
+  color: var(--color-input-errors);
+  margin-bottom: var(--12ws);
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: all 1s;
+}
+
+.error .input {
+  border: 1px solid var(--color-input-errors);
+}
+
+.error .msg-error {
+  display: inline-block;
+  font-size: var(--10px);
+  color: var(--color-input-errors);
+  margin-bottom: var(--12ws);
+
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ERRORS */

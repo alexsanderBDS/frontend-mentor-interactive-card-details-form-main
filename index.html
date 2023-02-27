@@ -38,50 +38,76 @@
       <section class="content">
         <form action="POST" class="form">
           <label for="form-name" class="form-label">Cardholder Name</label>
-          <input
-            id="form-name"
-            class="form-name input"
-            type="text"
-            placeholder="e.g. Jane Appleseed"
-            maxlength="32"
-          />
+          <div class="form-name-wrapper">
+            <input
+              name="form-name"
+              id="form-name"
+              class="form-name input"
+              type="text"
+              placeholder="e.g. Jane Appleseed"
+              minlength="3"
+              maxlength="32"
+              required
+            />
+            <span class="msg-error name-msg-error">houve um erro</span>
+          </div>
           <label for="form-number" class="form-label">Card Number</label>
-          <input
-            id="form-number"
-            class="form-number input"
-            type="tel"
-            placeholder="e.g. 1234 5678 9123 0000"
-            maxlength="19"
-            inputmode="numeric"
-            pattern="\d*"
-          />
+          <div class="form-number-wrapper">
+            <input
+              name="form-number"
+              id="form-number"
+              class="form-number input"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9\s]{13,19}"
+              placeholder="e.g. 1234 5678 9123 0000"
+              minlength="19"
+              maxlength="19"
+              required
+            />
+            <span class="msg-error number-msg-error">houve outro erro</span>
+          </div>
           <div class="form-wrapper">
             <div class="form-exp-dates">
               <label for="form-exp-date" class="form-label form-exp-date"
                 >Exp. Date (MM/YY)</label
               >
               <input
+                name="form-exp-month"
                 class="form-exp-month input"
                 type="text"
                 placeholder="MM"
+                inputmode="numeric"
+                minlength="2"
                 maxlength="2"
+                required
               />
               <input
+                name="form-exp-year"
                 class="form-exp-year input"
                 type="text"
                 placeholder="YY"
+                minlength="2"
                 maxlength="2"
+                required
+                inputmode="numeric"
               />
+              <span class="msg-error date-msg-error">houver mais ou erro</span>
             </div>
             <div class="form-cvc-wrapper">
               <label for="form-cvc" class="form-label">CVC</label>
               <input
+                name="form-cvc"
                 id="form-cvc"
                 class="form-cv input"
                 type="text"
                 placeholder="e.g. 123"
+                minlength="3"
                 maxlength="3"
+                required
+                inputmode="numeric"
               />
+              <span class="msg-error cvc-msg-error">houve mais outro erro</span>
             </div>
           </div>
           <button class="form-btn">Confirm</button>
@@ -105,5 +131,6 @@
         >. Coded by <a href="https://github.com/alexsanderBDS">Alexsander</a>.
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
