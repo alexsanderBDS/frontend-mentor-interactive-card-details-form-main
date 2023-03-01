@@ -1,17 +1,23 @@
 const formEl = document.querySelector(".form");
 const inputNumberEl = document.querySelector(".form-number");
 const inputEl = document.querySelectorAll(".input");
-const invalidEl = document.querySelectorAll(".input:invalid");
-// const formValidation = new FormData(formEl);
 
 formEl.addEventListener("submit", function (event) {
   event.preventDefault();
-});
+  inputEl.forEach((el) => {
+    el.setAttribute("required", true);
+    el.parentNode.querySelector(".msg-error").textContent =
+      el.validationMessage;
 
-inputEl.forEach((el) => {
-  el.addEventListener("keyup", function (event) {
-    console.log(event.target.validity);
+    setTimeout(() => {
+      el.removeAttribute("required");
+    }, "5000");
   });
+
+  formEl.classList.add("errors");
+  setTimeout(() => {
+    formEl.classList.remove("errors");
+  }, "5000");
 });
 
 inputNumberEl.addEventListener("keydown", function (event) {

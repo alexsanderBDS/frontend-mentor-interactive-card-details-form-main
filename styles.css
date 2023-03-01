@@ -69,7 +69,7 @@ html {
 
 /* REUSABEL */
 
-.input:focus:required:invalid {
+.errors .input:required:invalid {
   box-shadow: 0px 0px 0px 1px var(--color-input-errors);
 }
 
@@ -371,11 +371,11 @@ input:focus {
   transition: all 1s;
 }
 
-.error .input {
+/* .error .input {
   border: 1px solid var(--color-input-errors);
-}
+} */
 
-.error .msg-error {
+.errors .msg-error {
   display: inline-block;
   font-size: var(--10px);
   color: var(--color-input-errors);
