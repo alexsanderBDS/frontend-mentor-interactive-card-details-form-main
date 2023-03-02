@@ -1,23 +1,116 @@
 const formEl = document.querySelector(".form");
 const inputNumberEl = document.querySelector(".form-number");
+const contentEl = document.querySelector(".content");
+const msgBtn = document.querySelector(".msg-btn");
 const inputEl = document.querySelectorAll(".input");
+
+class Validations {
+  el;
+
+  constructor(el) {
+    this.el = el;
+  }
+
+  empty() {
+    if (!this.el.value) {
+      return "Can't be blank";
+    }
+    return "";
+  }
+
+  min() {
+    const [min, minRequired] = [
+      this.el.value.toString().length,
+      parseInt(this.el.getAttribute("minlength")),
+    ];
+
+    if (min < minRequired) {
+      return `Less than ${minRequired}`;
+    }
+    return "";
+  }
+
+  number(className) {
+    let onlyNumber = removeString(this.el.value, " ");
+    let bool = isNaN(onlyNumber);
+
+    if (bool && this.el.classList.contains(className)) {
+      return "Wrong format, numbers only";
+    }
+
+    return "";
+  }
+}
+
+function setValidation(element) {
+  const validation = new Validations(element);
+
+  let errors = [
+    validation.empty(),
+    validation.min(),
+    validation.number("form-number"),
+    validation.number("form-exp-month"),
+    validation.number("form-exp-year"),
+    validation.number("form-cvc"),
+  ];
+
+  const [error] = errors.filter((errorText) => {
+    if (errorText) {
+      return errorText;
+    }
+  });
+
+  if (error) {
+    element.parentNode.querySelector("span").textContent = error;
+    element.parentNode.classList.add("errors");
+    element.classList.add("error");
+  }
+}
+
+function setError(onEvent, element) {
+  element.addEventListener(onEvent, function (event) {
+    setValidation(event.target);
+  });
+}
+function unSetError(onEvent, element) {
+  element.addEventListener(onEvent, function (event) {
+    event.target.parentNode.classList.remove("errors");
+    event.target.classList.remove("error");
+  });
+}
+
+inputEl.forEach(function (el) {
+  unSetError("focus", el);
+  setError("blur", el);
+});
 
 formEl.addEventListener("submit", function (event) {
   event.preventDefault();
-  inputEl.forEach((el) => {
-    el.setAttribute("required", true);
-    el.parentNode.querySelector(".msg-error").textContent =
-      el.validationMessage;
 
-    setTimeout(() => {
-      el.removeAttribute("required");
-    }, "5000");
+  const form = new FormData(formEl);
+
+  for (const value of form.values()) {
+    if (!value) {
+      inputEl.forEach(function (el) {
+        setValidation(el);
+      });
+      return;
+    }
+  }
+
+  const errors = document.querySelectorAll(".errors");
+
+  if (!errors.length) {
+    contentEl.classList.add("show-msg");
+  }
+});
+
+msgBtn.addEventListener("click", function () {
+  inputEl.forEach((input) => {
+    input.value = null;
   });
 
-  formEl.classList.add("errors");
-  setTimeout(() => {
-    formEl.classList.remove("errors");
-  }, "5000");
+  contentEl.classList.remove("show-msg");
 });
 
 inputNumberEl.addEventListener("keydown", function (event) {

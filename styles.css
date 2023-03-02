@@ -69,10 +69,6 @@ html {
 
 /* REUSABEL */
 
-.errors .input:required:invalid {
-  box-shadow: 0px 0px 0px 1px var(--color-input-errors);
-}
-
 .input {
   padding: var(--12ws);
   border: 1px solid var(--color-light-grayish);
@@ -371,10 +367,6 @@ input:focus {
   transition: all 1s;
 }
 
-/* .error .input {
-  border: 1px solid var(--color-input-errors);
-} */
-
 .errors .msg-error {
   display: inline-block;
   font-size: var(--10px);
@@ -384,6 +376,10 @@ input:focus {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+}
+
+.error.input {
+  box-shadow: 0px 0px 0px 1px var(--color-input-errors);
 }
 
 /* ERRORS */
