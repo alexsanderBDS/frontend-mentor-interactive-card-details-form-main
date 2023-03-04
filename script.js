@@ -1,4 +1,5 @@
 const formEl = document.querySelector(".form");
+const inputNameEl = document.querySelector(".form-name");
 const inputNumberEl = document.querySelector(".form-number");
 const contentEl = document.querySelector(".content");
 const msgBtn = document.querySelector(".msg-btn");
@@ -79,6 +80,33 @@ function unSetError(onEvent, element) {
   });
 }
 
+function removeString(text, what) {
+  let parsedText = "";
+
+  if (typeof text === "string") {
+    let splitText = text.split(what);
+
+    splitText.forEach(function (txt) {
+      parsedText += txt;
+    });
+  }
+
+  return parsedText;
+}
+
+function capitalize(text, afterText) {
+  for (var i = text.length; i > 0; i--) {
+    if (text[i] === afterText) {
+      const parsedText = `${text.substring(0, text.length - 1)}${text[
+        i + 1
+      ].toUpperCase()}`;
+      return parsedText;
+    }
+  }
+}
+
+// * * * APPLY
+
 inputEl.forEach(function (el) {
   unSetError("focus", el);
   setError("blur", el);
@@ -113,6 +141,21 @@ msgBtn.addEventListener("click", function () {
   contentEl.classList.remove("show-msg");
 });
 
+inputNameEl.addEventListener("keydown", function () {
+  const text = this.value;
+  if (typeof text === "string") {
+    if (text.length === 1) {
+      this.value = text.toUpperCase();
+      return;
+    }
+
+    if (text.length > 2 && text[text.length - 2] === " ") {
+      this.value = capitalize(text, " ");
+      return;
+    }
+  }
+});
+
 inputNumberEl.addEventListener("keydown", function (event) {
   const text = removeString(event.target.value, " ");
 
@@ -125,17 +168,3 @@ inputNumberEl.addEventListener("keydown", function (event) {
     }
   }
 });
-
-function removeString(text, what) {
-  let parsedText = "";
-
-  if (typeof text === "string") {
-    let splitText = text.split(what);
-
-    splitText.forEach(function (txt) {
-      parsedText += txt;
-    });
-  }
-
-  return parsedText;
-}
