@@ -143,6 +143,7 @@ msgBtn.addEventListener("click", function () {
 
 inputNameEl.addEventListener("keydown", function () {
   const text = this.value;
+
   if (typeof text === "string") {
     if (text.length === 1) {
       this.value = text.toUpperCase();

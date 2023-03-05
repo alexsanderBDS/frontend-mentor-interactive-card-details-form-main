@@ -294,6 +294,13 @@ input:focus {
   color: var(--color-light-grayish);
   font-size: var(--16px);
   letter-spacing: 1px;
+
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  opacity: 0.85;
 }
 
 /* BUILD COMPONENT */
@@ -383,3 +390,104 @@ input:focus {
 }
 
 /* ERRORS */
+
+/* QUERIES */
+
+@media (min-width: calc(377em / 16)) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: calc(600em / 16)) {
+  .container {
+    max-width: calc(500rem / 16);
+  }
+}
+@media (min-width: calc(900em / 16)) {
+  .container {
+    max-width: calc(1440rem / 16);
+    min-height: 100vh;
+    padding: 0;
+    position: relative;
+
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cards {
+    min-height: 100%;
+    margin: 0;
+    background-image: url(images/bg-main-desktop.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: grid;
+    gap: var(--24ws);
+    justify-content: end;
+  }
+
+  .content {
+    /* margin: 0 auto; */
+    justify-self: center;
+    width: calc(350rem / 16);
+    margin-left: var(--128ws);
+  }
+
+  .form {
+    margin: 0;
+  }
+
+  .card {
+    position: relative;
+    width: calc(320rem / 16);
+    height: calc(180rem / 16);
+    transform: none;
+    top: 0;
+    left: 0;
+
+    transition: transform 1s;
+  }
+
+  .card:hover {
+    transform: translateX(0);
+  }
+
+  .card-front {
+    grid-row: 1;
+    align-self: end;
+    transform: translateX(30%);
+  }
+
+  .card-back {
+    align-self: start;
+    transform: translateX(50%);
+    /* background-image: url(images/bg-card-back.png); */
+    background-position: center;
+    background-size: cover;
+  }
+
+  .number {
+    font-size: var(--20px);
+  }
+
+  .name,
+  .exp-date,
+  .cvc-value {
+    font-size: var(--12px);
+  }
+
+  .attribution {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -95%);
+  }
+
+  .show-msg .completed-msg {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+}
